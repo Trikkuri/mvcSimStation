@@ -36,6 +36,15 @@ public class Simulation extends Model {
         }
     }
 
+    // adding agents
+    public void addAgent(Agent a) {
+        a.xc = Utilities.rng.nextInt(250);
+        a.yc = Utilities.rng.nextInt(250);
+        agents.add(a);
+        a.setWorld(this);
+    }
+
+
     // getting agents
     public Iterator<Agent> agentIterator() {
         return agents.iterator();
