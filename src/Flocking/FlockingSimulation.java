@@ -8,13 +8,13 @@ class Bird extends Agent {
 
     public Bird(String name) {
         super(name);
-        this.heading = Heading.random(); // Random initial direction
-        this.speed = Utilities.rng.nextInt(5) + 1; // Speed between 1 and 5
+        this.heading = Heading.random(); // Random direction
+        this.speed = Utilities.rng.nextInt(5) + 1;
     }
 
     @Override
     public void update() {
-        Agent neighbor = world.getNeighbor(this, 10); // Try to find a neighbor within 10 steps
+        Agent neighbor = world.getNeighbor(this, 10);
         if (neighbor != null && neighbor instanceof Bird) {
             Bird nearbyBird = (Bird) neighbor;
             this.heading = nearbyBird.heading; // Align direction
@@ -40,7 +40,7 @@ public class FlockingSimulation extends Simulation{
 
     @Override
     public void populate() {
-        for (int i = 0; i < 100; i++) { // Create 100 birds
+        for (int i = 0; i < 100; i++) { // Create birds
             Bird b = new Bird("Bird" + i);
             this.addAgent(b);
         }
