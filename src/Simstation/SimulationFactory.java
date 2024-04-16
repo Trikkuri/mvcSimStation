@@ -10,8 +10,8 @@ public class SimulationFactory implements AppFactory {
     }
 
     @Override
-    public View makeView(Model m) {
-        return new SimulationView((Simulation)m);
+    public View makeView(Model model) {
+        return new SimulationView(model);
     }
 
     @Override
