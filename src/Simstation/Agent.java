@@ -77,8 +77,39 @@ public abstract class Agent implements Serializable, Runnable {
 
     public abstract void update();
 
-    // implement move method !!!
-
+    public void move(int steps){
+        int xTemp, yTemp;
+        switch (heading){
+            case NORTH: {
+                for (int i = 0; i < steps; i++) {
+                    yc = ((yc - 1) % 250 + 250) % 250;
+                    world.changed();
+                }
+                break;
+            }
+            case EAST:{
+                for(int i = 0; i < steps; i++) {
+                    xc = ((xc + 1) % 250) % 250;
+                    world.changed();
+                }
+                break;
+            }
+            case SOUTH:{
+                for(int i = 0; i < steps; i++) {
+                    yc = ((yc + 1) % 250) % 250;
+                    world.changed();
+                }
+                break;
+            }
+            case WEST:{
+                for(int i = 0; i < steps; i++) {
+                    xc = ((xc - 1) % 250 + 250) % 250;
+                    world.changed();
+                }
+                break;
+            }
+        }
+    }
 
     // empty methods to be called in run()
     public void onStart() {
