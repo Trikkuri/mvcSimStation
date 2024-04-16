@@ -15,8 +15,7 @@ class Drunk extends Agent {
     public void update() {
         heading = Heading.random();
         int steps = Utilities.rng.nextInt(10) + 1;
-        // still need to implement move
-        // move(steps);
+        move(steps);
     }
 
 }
