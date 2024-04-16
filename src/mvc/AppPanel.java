@@ -43,46 +43,45 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         return result;
     }
 
-    public void actionPerformed(ActionEvent e) {
-        String cmd = e.getActionCommand();
-
+    @Override
+    public void actionPerformed(ActionEvent ae) {
         try {
-            switch (cmd) {
-                case "Save":
-                    Utilities.save(model, false);
-                    break;
-                case "SaveAs":
-                    Utilities.save(model, true);
-                    break;
-                case "Open":
-                    Model newModel = Utilities.open(model);
-                    if (newModel != null) {
-                        setModel(newModel);
-                    }
-                    break;
-                case "About":
-                    Utilities.inform(this.factory.about());
-                    break;
-                case "Help":
-                    Utilities.inform(this.factory.getHelp());
-                    break;
-                case "New":
+            switch (ae.getActionCommand()) {
+                case "New" -> {
                     Utilities.saveChanges(model);
                     setModel(factory.makeModel());
-                    model.setUnsavedChanges(false);
-                    break;
-                case "Quit":
+                }
+                case "Save" -> Utilities.save(model, false);
+                case "SaveAs" -> Utilities.save(model, true);
+                case "Open" -> {
+                    Model model = Utilities.open(this.model);
+                    if (model != null) setModel(model);
+                }
+                case "Quit" -> {
                     Utilities.saveChanges(model);
                     System.exit(0);
-                    break;
-                default:
-                    Command c = factory.makeEditCommand(this.model, cmd, this);
-                    c.execute();
+                }
+                case "About" -> Utilities.inform(factory.about());
+                case "Help" -> Utilities.inform(factory.getHelp());
+                default -> {
+                    Command command = factory.makeEditCommand(model, ae.getActionCommand(), ae.getSource());
+                    if (command == null) throw new Exception("Unrecognized command " + ae.getActionCommand());
+                    command.execute();
+                }
             }
-        } catch (Exception error) {
-            Utilities.error(error);
+        } catch (Exception e) {
+            handleException(e);
         }
+    }
 
+    protected void addButtons() {
+        for (String command : factory.getEditCommands()) {
+            JPanel p = new JPanel();
+            JButton b = new JButton(command);
+            b.addActionListener(this);
+            p.add(b);
+            controls.add(p);
+        }
     }
 
     public void display() {
@@ -98,5 +97,9 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         this.model.subscribe(this);
         view.setModel(this.model);
         model.changed();
+    }
+
+    protected void handleException(Exception e) {
+        Utilities.error(e);
     }
 }
