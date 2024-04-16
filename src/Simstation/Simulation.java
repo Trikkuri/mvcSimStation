@@ -107,8 +107,22 @@ public class Simulation extends Model {
     }
 
 
-    // implement getNeighbor method !!!
+    // getNeighbor method
+    public synchronized Agent getNeighbor(Agent a, double radius) {
+        double xcLowerBound = a.xc - radius;
+        double xcUpperBound = a.xc + radius;
+        double ycLowerBound = a.yc - radius;
+        double ycUpperBound = a.yc + radius;
 
+        for(Agent ag : agents)
+        {
+            if(ag != a &&
+                    ag.xc >= xcLowerBound && ag.xc <= xcUpperBound &&
+                    ag.yc >= ycLowerBound && ag.yc <= ycUpperBound)
+            { return ag; }
+        }
+        return null;
+    }
 
     public void populate() {}
 }
