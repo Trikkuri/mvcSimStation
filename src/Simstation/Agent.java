@@ -25,9 +25,26 @@ public abstract class Agent implements Serializable, Runnable {
         myThread = null;
     }
 
-    // implement run method !!!!!
+    public void setWorld(Simulation world){
+        this.world = world;
+    }
 
-    public synchronized void start(){
+    public void run(){
+        myThread = Thread.currentThread();
+        onStart();
+        while(!isStopped()){
+            try {
+                update();
+                Thread.sleep(20);
+                checkSuspended();
+            } catch(InterruptedException e){
+                Utilities.error(e);
+            }
+        }
+        onExit();
+    }
+
+    public synchronized void start() {
         myThread = new Thread(this);
         myThread.start();
     }
@@ -62,4 +79,17 @@ public abstract class Agent implements Serializable, Runnable {
 
     // implement move method !!!
 
+
+    // empty methods to be called in run()
+    public void onStart() {
+        // override
+    }
+
+    public void onInterrupted() {
+        // override
+    }
+
+    public void onExit() {
+        // override
+    }
 }
