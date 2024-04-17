@@ -18,9 +18,4 @@ public class PrisonersDilemmaFactory extends SimulationFactory {
     public String getTitle() {
         return "Prisoner's Dilemma Simulation";
     }
-
-    protected StatsCommand makeStatsCommand(Model model) {
-        return new PrisonersDilemmaStatsCommand(model);
-    }
-
 }

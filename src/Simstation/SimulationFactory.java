@@ -31,7 +31,7 @@ public class SimulationFactory implements AppFactory {
 
     @Override
     public String about() {
-        return "Simstation from Stefan Le,...";
+        return "Simstation from Stefan Le, Mohammad Edrees Nassimi, & Brandom Pham.";
     }
 
     @Override
