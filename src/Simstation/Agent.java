@@ -13,6 +13,7 @@ public abstract class Agent implements Serializable, Runnable {
     private boolean suspended;
     private boolean stopped;
     transient protected Thread myThread;
+    public final static int WORLD_SIZE = 500;
 
     public Agent(String name){
         this();
@@ -83,28 +84,28 @@ public abstract class Agent implements Serializable, Runnable {
         switch (heading){
             case NORTH: {
                 for (int i = 0; i < steps; i++) {
-                    yc = ((yc - 1) % 250 + 250) % 250;
+                    yc = ((yc - 1) % WORLD_SIZE + WORLD_SIZE) % WORLD_SIZE;
                     world.changed();
                 }
                 break;
             }
             case EAST:{
                 for(int i = 0; i < steps; i++) {
-                    xc = ((xc + 1) % 250) % 250;
+                    xc = ((xc + 1) % WORLD_SIZE) % WORLD_SIZE;
                     world.changed();
                 }
                 break;
             }
             case SOUTH:{
                 for(int i = 0; i < steps; i++) {
-                    yc = ((yc + 1) % 250) % 250;
+                    yc = ((yc + 1) % WORLD_SIZE) % WORLD_SIZE;
                     world.changed();
                 }
                 break;
             }
             case WEST:{
                 for(int i = 0; i < steps; i++) {
-                    xc = ((xc - 1) % 250 + 250) % 250;
+                    xc = ((xc - 1) % WORLD_SIZE + WORLD_SIZE) % WORLD_SIZE;
                     world.changed();
                 }
                 break;

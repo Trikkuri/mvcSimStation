@@ -4,6 +4,8 @@ import mvc.*;
 
 import java.util.*;
 
+import static Simstation.Agent.WORLD_SIZE;
+
 public class Simulation extends Model {
     private List<Agent> agents;
     transient private Timer timer; // timers aren't serializable
@@ -38,8 +40,8 @@ public class Simulation extends Model {
 
     // adding agents
     public void addAgent(Agent a) {
-        a.xc = Utilities.rng.nextInt(250);
-        a.yc = Utilities.rng.nextInt(250);
+        a.xc = Utilities.rng.nextInt(WORLD_SIZE);
+        a.yc = Utilities.rng.nextInt(WORLD_SIZE);
         agents.add(a);
         a.setWorld(this);
     }
