@@ -1,7 +1,12 @@
 package Simstation;
 
+import Flocking.*;
 import mvc.*;
-import java.util.*;
+import Plague.*;
+import randomwalk.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatsCommand extends Command {
     public StatsCommand(Model model) {
@@ -10,15 +15,23 @@ public class StatsCommand extends Command {
 
     protected String[] getStatsMessage() {
         Simulation simulation = (Simulation)model;
+        List<String> stats = new ArrayList<>();
 
-        // new textbox for stats
-        return new String[]{
-                "#agents = " + simulation.getAgentCount(),
-                "clock = " + simulation.getClock()};
+        stats.add("#agents = " + simulation.getAgentCount());
+        stats.add("clock = " + simulation.getClock());
+
+        if (model instanceof PlagueSimulation) {
+            PlagueSimulation plagueSimulation = (PlagueSimulation)model;
+            double infectedPercent = plagueSimulation.getPercentInfected();
+            stats.add("%infected = " + infectedPercent);
+        } else if (model instanceof FlockingSimulation) {
+
+        }
+
+        return stats.toArray(new String[0]);
     }
 
     public void execute() throws Exception {
-        // send message
         Utilities.inform(getStatsMessage());
     }
 }
