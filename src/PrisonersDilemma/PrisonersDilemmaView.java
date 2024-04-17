@@ -12,24 +12,29 @@ public class PrisonersDilemmaView extends SimulationView {
     }
 
     @Override
-    public void paintComponent(Graphics gc) {
-        super.paintComponent(gc);
-        Simulation sim = (Simulation) model;
-        Iterator<Agent> it = sim.agentIterator();
-
-        int index = 0;
-        int rowSize = (int) Math.sqrt(sim.getAgentCount());  // Determine the row size if you want a grid layout
+    protected void drawAgents(Graphics gc) {
+        Simulation simulation = (Simulation) model;
+        Iterator<Agent> it = simulation.agentIterator();
 
         while (it.hasNext()) {
-            Prisoner p = (Prisoner) it.next();
-            int x = (index % rowSize) * 20 + 10;  // 20 pixels apart, 10 pixel offset
-            int y = (index / rowSize) * 20 + 10;
+            Agent agent = it.next();
+            if (agent instanceof Prisoner) {
+                Prisoner prisoner = (Prisoner) agent;
+                Color color = prisoner.cooperate() ? Color.GREEN : Color.RED;
+                gc.setColor(color);
 
-            Color color = p.cooperate() ? Color.GREEN : Color.RED;  // Green for cooperate, Red for cheat
-            gc.setColor(color);
-            gc.fillOval(x, y, 10, 10);  // Draw each prisoner at calculated coordinates
-
-            index++;
+                int x = prisoner.xc;
+                int y = prisoner.yc;
+                int size = AGENT_SIZE;
+                int halfSize = size / 2;
+                gc.fillOval(x - halfSize, y - halfSize, size, size);
+            }
         }
+    }
+
+    @Override
+    public void paintComponent(Graphics gc) {
+        super.paintComponent(gc); // Ensure the background is cleared
+        drawAgents(gc); // Custom agent drawing
     }
 }
