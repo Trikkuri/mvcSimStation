@@ -35,7 +35,8 @@ public class Prisoner extends Agent {
             partnerCheated = !theirDecision;
             neighbor.partnerCheated = !myDecision;
         }
-        move(5);
+        heading = Heading.random();
+        move(2);
     }
 
     public int getFitness() {

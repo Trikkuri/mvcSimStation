@@ -20,7 +20,7 @@ public class PrisonersDilemmaStatsCommand extends StatsCommand {
     @Override
     public void execute() {
         PrisonersDilemmaSimulation sim = (PrisonersDilemmaSimulation) getModel();
-        String statsMessage = sim.getAverageFitness();
+        String[] statsMessage = getStatsMessage();
         Utilities.inform(statsMessage);
     }
 }
