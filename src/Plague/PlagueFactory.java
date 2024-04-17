@@ -13,7 +13,6 @@ public class PlagueFactory extends SimulationFactory {
     public String getTitle(){
         return "Plague Customization";
     }
-
     protected StatsCommand statsCommand(Model model){
         return new PlagueStatsCommand(model);
     }
