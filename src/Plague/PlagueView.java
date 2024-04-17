@@ -4,6 +4,7 @@ import Simstation.*;
 import mvc.*;
 
 import java.awt.*;
+import java.util.Iterator;
 
 public class PlagueView extends SimulationView {
     // constants for agent color
@@ -13,9 +14,24 @@ public class PlagueView extends SimulationView {
     // ctr
     public PlagueView(Model model) {
         super(model);
+        setOpaque(true);
     }
 
-    // implement a method to draw the agents on the board !!!
-    // before this is implemented, there are simply white agents that are neither safe nor infected
+    @Override
+    public void paintComponent(Graphics gc) {
+        super.paintComponent(gc);
+        PlagueSimulation plague = (PlagueSimulation) model;
+        Iterator<Agent> people = plague.agentIterator();
 
+        int centerOffset = AGENT_SIZE / 2;
+        while(people.hasNext()) {
+            PlagueAgent p = (PlagueAgent) people.next();
+            if (p.getInfected()) {
+                gc.setColor(INFECTED_COLOR);
+            } else {
+                gc.setColor(SAFE_COLOR);
+            }
+            gc.fillOval(p.xc - centerOffset, p.yc - centerOffset, AGENT_SIZE, AGENT_SIZE);
+        }
+    }
 }

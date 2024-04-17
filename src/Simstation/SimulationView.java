@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class SimulationView extends View {
 
-    protected final static int AGENT_SIZE = 5;
+    protected final static int AGENT_SIZE = 10;
     protected Color agentColor = Color.WHITE;
     protected Color backgroundColor = Color.GRAY;
 
