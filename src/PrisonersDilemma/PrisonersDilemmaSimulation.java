@@ -50,10 +50,10 @@ public class PrisonersDilemmaSimulation extends Simulation {
         }
 
         return String.format(
-                "Average fitness for Always Cooperate: %s\n" +
-                        "Average fitness for Always Cheat: %s\n" +
-                        "Average fitness for Randomly Cooperate: %s\n" +
-                        "Average fitness for Tit for Tat: %s",
+                "Average fitness for Always Cooperate (Green): %s\n" +
+                        "Average fitness for Always Cheat (Red): %s\n" +
+                        "Average fitness for Randomly Cooperate (Yellow): %s\n" +
+                        "Average fitness for Tit for Tat (Blue): %s",
                 calculateAverage(totalCoop, countCoop),
                 calculateAverage(totalCheat, countCheat),
                 calculateAverage(totalRandom, countRandom),
