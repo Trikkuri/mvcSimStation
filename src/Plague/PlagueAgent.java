@@ -11,18 +11,21 @@ public class PlagueAgent extends Agent {
 
     // ctr
     public PlagueAgent() {
-        int startingInfected = Utilities.rng.nextInt(10) + 1;
-        if (startingInfected < INITIAL_INFECTED){
-            infected = true;
-        } else {
-            infected = false;
-        }
+//        int startingInfected = Utilities.rng.nextInt(10) + 1;
+//        if (startingInfected < INITIAL_INFECTED){
+//            infected = true;
+//        } else {
+//            infected = false;
+//        }
         heading = Heading.random();
     }
 
     // getter for infected
     public boolean getInfected() {
         return infected;
+    }
+    public void setInfected(boolean infected) {
+        this.infected = infected;
     }
 
     // updating the infected
