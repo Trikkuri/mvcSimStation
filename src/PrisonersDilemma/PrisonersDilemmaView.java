@@ -7,10 +7,10 @@ import java.util.Iterator;
 
 public class PrisonersDilemmaView extends SimulationView {
 
-    private final Color COLOR_COOPERATE = Color.GREEN;
-    private final Color COLOR_RANDOMLY_COOPERATE = Color.YELLOW;
-    private final Color COLOR_CHEAT = Color.RED;
-    private final Color COLOR_TIT4TAT = Color.BLUE;
+    private final Color colorCooperate = Color.GREEN;
+    private final Color colorRandomlyCooperate = Color.YELLOW;
+    private final Color colorCheat = Color.RED;
+    private final Color colorTit4Tat = Color.BLUE;
 
     public PrisonersDilemmaView(Model model) {
         super(model);
@@ -29,16 +29,16 @@ public class PrisonersDilemmaView extends SimulationView {
 
             switch (type) {
                 case COOPERATE:
-                    gc.setColor(COLOR_COOPERATE);
+                    gc.setColor(colorCooperate);
                     break;
                 case RANDOMLY_COOPERATE:
-                    gc.setColor(COLOR_RANDOMLY_COOPERATE);
+                    gc.setColor(colorRandomlyCooperate);
                     break;
                 case CHEAT:
-                    gc.setColor(COLOR_CHEAT);
+                    gc.setColor(colorCheat);
                     break;
                 case TIT4TAT:
-                    gc.setColor(COLOR_TIT4TAT);
+                    gc.setColor(colorTit4Tat);
                     break;
             }
 
