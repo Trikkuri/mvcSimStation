@@ -13,7 +13,12 @@ public class PlagueSimulation extends Simulation {
     // populate the board with extension of agent
     public void populate() {
         for (int i = 0; i < AGENT_POPULATION; i++) {
-            addAgent(new PlagueAgent());
+            PlagueAgent pa = new PlagueAgent();
+            addAgent(pa);
+
+            if (Utilities.rng.nextInt(100) < 5) {
+                pa.setInfected(true);
+            }
         }
     }
 
